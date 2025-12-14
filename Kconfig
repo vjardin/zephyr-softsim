@@ -1,0 +1,54 @@
+# SPDX-License-Identifier: AGPL-3.0-only
+#
+# Copyright (c) 2025 Vincent Jardin <vjardin@free.fr>, Free Mobile
+#
+# Kconfig for zephyr-softsim module
+
+menuconfig SOFTSIM
+	bool "Software SIM (Soft SIM) support"
+	depends on NVS
+	depends on FLASH
+	depends on FLASH_MAP
+	depends on HEAP_MEM_POOL_SIZE > 0
+	help
+	  Enable software SIM (UICC/USIM) support using the onomondo-uicc
+	  library. This provides a complete SIM implementation in software,
+	  suitable for use with cellular modems that support external SIM
+	  interfaces (e.g., Nordic nRF91 series).
+
+if SOFTSIM
+
+config SOFTSIM_LOG_LEVEL
+	int "Soft SIM log level"
+	default 3
+	range 0 4
+	help
+	  Log level for the soft SIM library.
+	  0 = OFF, 1 = ERR, 2 = WRN, 3 = INF, 4 = DBG
+
+config SOFTSIM_STORAGE_PATH
+	string "Storage path prefix"
+	default "/softsim"
+	help
+	  Path prefix used for SIM file storage in NVS.
+
+config SOFTSIM_MAX_PATH_LEN
+	int "Maximum path length"
+	default 64
+	help
+	  Maximum length of file paths in the SIM filesystem.
+
+config SOFTSIM_MAX_OPEN_FILES
+	int "Maximum concurrent open files"
+	default 4
+	help
+	  Maximum number of files that can be open simultaneously.
+
+config SOFTSIM_MAX_FILE_SIZE
+	int "Maximum file size"
+	default 1536
+	help
+	  Maximum size of a single SIM file in bytes.
+	  The largest standard SIM file is approximately 1280 bytes.
+
+endif # SOFTSIM

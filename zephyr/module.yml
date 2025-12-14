@@ -1,0 +1,9 @@
+# SPDX-License-Identifier: AGPL-3.0-only
+#
+# Copyright (c) 2025 Vincent Jardin <vjardin@free.fr>, Free Mobile
+#
+# Zephyr module definition for zephyr-softsim
+
+build:
+  cmake: .
+  kconfig: Kconfig

@@ -1,0 +1,23 @@
+# SPDX-License-Identifier: AGPL-3.0-only
+#
+# Copyright (c) 2025 Vincent Jardin <vjardin@free.fr>, Free Mobile
+#
+# West manifest for zephyr-softsim module
+#
+# This manifest fetches the onomondo-uicc library as a dependency.
+
+manifest:
+  version: 0.13
+
+  remotes:
+    - name: onomondo
+      url-base: https://github.com/onomondo
+
+  projects:
+    - name: onomondo-uicc
+      remote: onomondo
+      revision: master
+      path: modules/lib/onomondo-uicc
+
+  self:
+    path: modules/lib/zephyr-softsim
