@@ -110,6 +110,13 @@ zephyr_library_include_directories(
 # Public includes for application use
 zephyr_include_directories(
     ${ONOMONDO_UICC_DIR}/include
+    ${ONOMONDO_UICC_DIR}/utils/files-c-array
+)
+
+# Public compile definitions for application use
+# Required for correct macro expansion (e.g., SS_FREE -> free() vs port_free())
+zephyr_compile_definitions(
+    CONFIG_USE_SYSTEM_HEAP
 )
 
 endif() # CONFIG_SOFTSIM
