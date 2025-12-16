@@ -106,8 +106,8 @@ static int ensure_nvs_init(void)
     softsim_nvs.sector_size = SOFTSIM_NVS_SECTOR_SIZE;
     softsim_nvs.sector_count = SOFTSIM_NVS_SECTOR_COUNT;
 
-    LOG_INF("NVS: offset=0x%x, sector_size=%u, sector_count=%u",
-            softsim_nvs.offset, softsim_nvs.sector_size, softsim_nvs.sector_count);
+    LOG_INF("NVS: offset=0x%lx, sector_size=%u, sector_count=%u",
+            (unsigned long)softsim_nvs.offset, softsim_nvs.sector_size, softsim_nvs.sector_count);
 
     err = nvs_mount(&softsim_nvs);
     if (err) {
@@ -307,7 +307,7 @@ size_t ss_fwrite(const void *ptr, size_t size, size_t count, ss_FILE f)
     return count;
 }
 
-int ss_file_size(char *path)
+int ss_file_size(const char *path)
 {
     int err;
     uint16_t nvs_id;
