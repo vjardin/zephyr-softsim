@@ -1,0 +1,65 @@
+name: CI
+
+on:
+  push:
+    branches: [main]
+  pull_request:
+    branches: [main]
+
+jobs:
+  check-format:
+    name: Code Formatting
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+
+      - name: Install clang-format
+        run: sudo apt-get install -y clang-format
+
+      - name: Check C code formatting (Zephyr style)
+        run: |
+          find src -name '*.c' -o -name '*.h' | xargs clang-format --dry-run --Werror \
+            --style='{BasedOnStyle: LLVM, IndentWidth: 8, UseTab: Always, TabWidth: 8, BreakBeforeBraces: Linux, AllowShortIfStatementsOnASingleLine: false, IndentCaseLabels: false}'
+
+  check-license:
+    name: SPDX License Headers
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+
+      - name: Check SPDX headers in source files
+        run: |
+          error=0
+          for file in $(find src -name '*.c' -o -name '*.h'); do
+            if ! head -1 "$file" | grep -q "SPDX-License-Identifier"; then
+              echo "Missing SPDX header: $file"
+              error=1
+            fi
+          done
+          exit $error
+
+      - name: Check SPDX headers in build files
+        run: |
+          error=0
+          for file in CMakeLists.txt Kconfig; do
+            if [ -f "$file" ] && ! head -1 "$file" | grep -q "SPDX-License-Identifier"; then
+              echo "Missing SPDX header: $file"
+              error=1
+            fi
+          done
+          exit $error
+
+  check-west:
+    name: West Manifest
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+
+      - name: Install West
+        run: pip install west
+
+      - name: Validate west.yml syntax
+        run: python -c "import yaml; yaml.safe_load(open('west.yml'))"
+
+      - name: Validate module.yml syntax
+        run: python -c "import yaml; yaml.safe_load(open('zephyr/module.yml'))"
