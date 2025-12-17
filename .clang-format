@@ -1,0 +1,10 @@
+# SPDX-License-Identifier: AGPL-3.0-only
+# Zephyr coding style (Linux kernel style)
+BasedOnStyle: LLVM
+IndentWidth: 8
+UseTab: Always
+TabWidth: 8
+BreakBeforeBraces: Linux
+AllowShortIfStatementsOnASingleLine: false
+IndentCaseLabels: false
+ColumnLimit: 100

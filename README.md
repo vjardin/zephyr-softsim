@@ -326,6 +326,18 @@ Contributions are welcome. Please ensure:
 2. Changes are tested on real hardware
 3. Documentation is updated accordingly
 
+### Code Formatting
+
+This project uses `clang-format` with Zephyr/Linux kernel style. Check your code before submitting:
+
+```bash
+# Check formatting (dry-run)
+clang-format --dry-run -Werror src/*.c
+
+# Auto-fix formatting
+clang-format -i src/*.c
+```
+
 ## Acknowledgments
 
 - [Onomondo](https://onomondo.com/) for the onomondo-uicc library
