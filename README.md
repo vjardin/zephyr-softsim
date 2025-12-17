@@ -326,9 +326,9 @@ Contributions are welcome. Please ensure:
 2. Changes are tested on real hardware
 3. Documentation is updated accordingly
 
-### Code Formatting
+### Code Formatting (Optional)
 
-This project uses `clang-format` with Zephyr/Linux kernel style. Check your code before submitting:
+A `.clang-format` file is provided for Zephyr/Linux kernel style. Usage is optional:
 
 ```bash
 # Check formatting (dry-run)
