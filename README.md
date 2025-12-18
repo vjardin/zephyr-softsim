@@ -1,6 +1,7 @@
 # zephyr-softsim
 
 [![CI](https://github.com/vjardin/zephyr-softsim/actions/workflows/ci.yml/badge.svg)](https://github.com/vjardin/zephyr-softsim/actions/workflows/ci.yml)
+[![License: AGPL-3.0](https://img.shields.io/badge/License-AGPL--3.0-blue.svg)](https://www.gnu.org/licenses/agpl-3.0)
 
 Zephyr RTOS module providing software SIM (Soft SIM / UICC / USIM) support
 using the [onomondo-uicc](https://github.com/onomondo/onomondo-uicc) library.
